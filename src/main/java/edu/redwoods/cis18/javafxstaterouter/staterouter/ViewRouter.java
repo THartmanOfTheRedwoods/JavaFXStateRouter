@@ -1,5 +1,6 @@
-package edu.redwoods.cis18.javafxstaterouter;
+package edu.redwoods.cis18.javafxstaterouter.staterouter;
 
+import edu.redwoods.cis18.javafxstaterouter.controllers.MainAppController;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
@@ -15,19 +16,9 @@ public class ViewRouter {
     public ViewRouter(Stage stage) {
         this.stage = stage;
 
-        // Since we made these states JavaFX controllers, they get instantiated via JavaFX
-        // The ViewRouter is grabbed via a singleton
-        // Could get these via the app, but just as easy to set them via setters.
-        /*
         homeViewState = new HomeViewState(this);
         settingsViewState = new SettingsViewState(this);
         profileViewState = new ProfileViewState(this);
-
-        currentState = homeViewState; // Default to Home View
-        */
-        homeViewState = new HomeViewState();
-        settingsViewState = new SettingsViewState();
-        profileViewState = new ProfileViewState();
 
         currentState = homeViewState; // Default to Home View
     }
@@ -36,8 +27,8 @@ public class ViewRouter {
         currentState.showView(stage);
     }
 
-    public void transitionToNext(ActionEvent event) {
-        currentState.transitionToNext(event);
+    public void transitionToNext(ActionEvent event, MainAppController controller) {
+        currentState.transitionToNext(event, controller);
     }
 
     public void setCurrentState(ViewState state) {
@@ -69,4 +60,3 @@ public class ViewRouter {
         this.settingsViewState = state;
     }
 }
-
